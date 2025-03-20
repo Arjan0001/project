@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Platform</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3264a8;
+        }
+
+        /* Main content styles */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .class-selection {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .class-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+
+        .class-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #3264a8;
+        }
+
+        .class-card p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .selected {
+            border: 2px solid #3498db;
+            background-color: #ebf5fb;
+        }
+
+        .cta-button {
+            display: block;
+            width: 200px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        .cta-button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .class-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .class-card {
+                padding: 1rem;
+            }
+
+            .class-card h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 45px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .class-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path fill="#3264a8" d="M256 32l192 96v128c0 118-150 224-192 224S64 374 64 256V128l192-96z"/>
+                <path fill="#ffffff" d="M256 62L106 137v119c0 90 116 172 150 172s150-82 150-172V137L256 62z"/>
+                <path fill="#3264a8" d="M176 249v-50l80-40 80 40v50l-80 40-80-40z"/>
+                <path fill="#3264a8" d="M256 349c-19 0-35-16-35-35v-45l35 17 35-17v45c0 19-16 35-35 35z"/>
+                <path fill="#ffffff" d="M256 319c-5 0-9-4-9-9v-22l9 4 9-4v22c0 5-4 9-9 9z"/>
+                <path fill="#3264a8" d="M183 229l73-36 73 36-73 37-73-37z"/>
+            </svg>
+            <span class="logo-text">EduPlatform</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome-section">
+            <h1>Welcome to EduPlatform</h1>
+            <p class="welcome-text">Your journey to educational excellence starts here. Select your class below to access customized learning materials, interactive exercises, and engaging content designed for your curriculum.</p>
+        </section>
+
+        <section class="class-selection">
+            <h2>Select Your Class</h2>
+            <div class="class-grid">
+                <div class="class-card" data-class="5">
+                    <h3>Class 5</h3>
+                    <p>Foundation building with interactive lessons</p>
+                </div>
+                <div class="class-card" data-class="6">
+                    <h3>Class 6</h3>
+                    <p>Expanding knowledge with core subjects</p>
+                </div>
+                <div class="class-card" data-class="7">
+                    <h3>Class 7</h3>
+                    <p>Strengthening concepts with advanced topics</p>
+                </div>
+                <div class="class-card" data-class="8">
+                    <h3>Class 8</h3>
+                    <p>Preparing for higher education challenges</p>
+                </div>
+                <div class="class-card" data-class="9">
+                    <h3>Class 9</h3>
+                    <p>Building critical thinking skills</p>
+                </div>
+                <div class="class-card" data-class="10">
+                    <h3>Class 10</h3>
+                    <p>Comprehensive preparation for board exams</p>
+                </div>
+                <div class="class-card" data-class="11">
+                    <h3>Class 11</h3>
+                    <p>Specialized streams with in-depth content</p>
+                </div>
+                <div class="class-card" data-class="12">
+                    <h3>Class 12</h3>
+                    <p>Advanced curriculum with exam focus</p>
+                </div>
+            </div>
+
+            <button class="cta-button" id="proceed-button" disabled>Proceed</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 EduPlatform. All rights reserved.</p>
+            <p>Empowering students with quality education</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const classCards = document.querySelectorAll('.class-card');
+            const proceedButton = document.getElementById('proceed-button');
+            let selectedClass = null;
+
+            // Add click event listeners to class cards
+            classCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove 'selected' class from all cards
+                    classCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Add 'selected' class to clicked card
+                    this.classList.add('selected');
+                    
+                    // Update selected class
+                    selectedClass = this.getAttribute('data-class');
+                    
+                    // Enable proceed button
+                    proceedButton.disabled = false;
+                });
+            });
+
+            // Add click event listener to proceed button
+            proceedButton.addEventListener('click', function() {
+                if (selectedClass) {
+                    // In a real application, you would redirect to the class page
+                    alert(You selected Class ${selectedClass}. Redirecting to class page...);
+                    // Simulating redirection
+                    setTimeout(() => {
+                        window.location.href = #class-${selectedClass};
+                        // In a real application, use: window.location.href = class-${selectedClass}.html;
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
